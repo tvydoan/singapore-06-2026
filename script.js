@@ -88,9 +88,11 @@ fetch('data.json')
         <p>${p.futurePractice}</p>
       `;
 
-      // reset card
       content.scrollTop = 0;
-      content.style.opacity = 1;
+      content.style.setProperty(
+        '--fade-top',
+        '0px'
+      );
 
       map.flyTo({
         center: [p.lon, p.lat],
@@ -117,33 +119,25 @@ fetch('data.json')
     showStory(1);
 
     /* ==========================
-       FADE WHEN SCROLLING CARD
+       FADE TOP WHILE SCROLLING
        ========================== */
 
-    content.addEventListener('scroll', () => {
+    content.addEventListener(
+      'scroll',
+      () => {
 
-      const maxScroll =
-        content.scrollHeight -
-        content.clientHeight;
+        const fade =
+          Math.min(
+            content.scrollTop,
+            100
+          );
 
-      if (maxScroll <= 0) {
-        content.style.opacity = 1;
-        return;
-      }
-
-      const progress =
-        content.scrollTop /
-        maxScroll;
-
-      const opacity =
-        Math.max(
-          0.3,
-          1 - progress * 0.8
+        content.style.setProperty(
+          '--fade-top',
+          `${fade}px`
         );
 
-      content.style.opacity =
-        opacity;
-
-    });
+      }
+    );
 
   });
