@@ -11,11 +11,7 @@ fetch('data.json')
   .then(res => res.json())
   .then(({ days }) => {
 
-    const stopMeta = []; // { id, dayId, index }
-
-    /* ==========================
-       BUILD STOPS AS GL LAYERS + ROUTE LINES
-       ========================== */
+    const stopMeta = [];
 
     map.on('load', () => {
 
@@ -30,7 +26,10 @@ fetch('data.json')
           type: 'geojson',
           data: {
             type: 'Feature',
-            geometry: { type: 'LineString', coordinates: coords }
+            geometry: {
+              type: 'LineString',
+              coordinates: coords
+            }
           }
         });
 
@@ -51,20 +50,33 @@ fetch('data.json')
           features.push({
             type: 'Feature',
             id: uid,
-            properties: { dayId: day.id, index, color: day.color },
-            geometry: { type: 'Point', coordinates: [stop.lon, stop.lat] }
+            properties: {
+              dayId: day.id,
+              index,
+              color: day.color
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [stop.lon, stop.lat]
+            }
           });
 
-          stopMeta.push({ id: uid, dayId: day.id, index });
+          stopMeta.push({
+            id: uid,
+            dayId: day.id,
+            index
+          });
+
           uid++;
-
         });
-
       });
 
       map.addSource('stops', {
         type: 'geojson',
-        data: { type: 'FeatureCollection', features }
+        data: {
+          type: 'FeatureCollection',
+          features
+        }
       });
 
       map.addLayer({
@@ -72,7 +84,12 @@ fetch('data.json')
         type: 'circle',
         source: 'stops',
         paint: {
-          'circle-radius': ['case', ['boolean', ['feature-state', 'active'], false], 20, 0],
+          'circle-radius': [
+            'case',
+            ['boolean', ['feature-state', 'active'], false],
+            20,
+            0
+          ],
           'circle-color': ['get', 'color'],
           'circle-opacity': 0.25,
           'circle-blur': 1
@@ -84,178 +101,281 @@ fetch('data.json')
         type: 'circle',
         source: 'stops',
         paint: {
-          'circle-radius': ['case', ['boolean', ['feature-state', 'active'], false], 7, 5],
+          'circle-radius': [
+            'case',
+            ['boolean', ['feature-state', 'active'], false],
+            7,
+            5
+          ],
           'circle-color': ['get', 'color'],
           'circle-stroke-width': 1.5,
           'circle-stroke-color': '#ffffff',
-          'circle-stroke-opacity': ['case', ['boolean', ['feature-state', 'active'], false], 1, 0.5]
+          'circle-stroke-opacity': [
+            'case',
+            ['boolean', ['feature-state', 'active'], false],
+            1,
+            0.5
+          ]
         }
       });
 
     });
 
     /* ==========================
-       BUILD SCROLL CONTENT
+       BUILD HTML
        ========================== */
 
     let html = `
-      <h1>A Journey of Learning</h1>
-      <div class="subtitle">Singapore Internship Experience 2026</div>
+      <section class="hero">
+        <h1>A Journey of Learning</h1>
+        <div class="subtitle">
+          Singapore Internship Experience 2026
+        </div>
+      </section>
     `;
 
     days.forEach(day => {
 
       html += `
-        <section class="day-block" data-day="${day.id}" style="--day-color:${day.color}">
+        <section
+          class="day-block"
+          data-day="${day.id}"
+          style="--day-color:${day.color}"
+        >
 
-          <div class="day-header">
-            <span class="day-tag">${day.label}</span>
-          </div>
+          <div class="day-inner">
 
-          <p class="day-insight">${day.insight}</p>
+            <div class="day-header">
+              <span class="day-tag">${day.label}</span>
+            </div>
 
-          <div class="stops">
+            <p class="day-insight">
+              ${day.insight}
+            </p>
+
+            <div class="stops">
       `;
 
       day.stops.forEach((stop, index) => {
+
         html += `
-          <div class="stop-block" data-day="${day.id}" data-index="${index}">
-            <div class="stop-marker" style="--dot-color:${day.color}">${stop.icon || ''}</div>
+          <div
+            class="stop-block"
+            data-day="${day.id}"
+            data-index="${index}"
+          >
+            <div
+              class="stop-marker"
+              style="--dot-color:${day.color}"
+            >
+              ${stop.icon || ''}
+            </div>
+
             <div class="stop-body">
-              <h3 class="stop-title">${stop.title}</h3>
-              ${stop.caption ? `<p class="stop-caption">${stop.caption}</p>` : ''}
-              ${stop.image ? `<img src="${stop.image}">` : ''}
+              <h3 class="stop-title">
+                ${stop.title}
+              </h3>
+
+              ${
+                stop.caption
+                  ? `<p class="stop-caption">${stop.caption}</p>`
+                  : ''
+              }
+
+              ${
+                stop.image
+                  ? `<img src="${stop.image}">`
+                  : ''
+              }
             </div>
           </div>
         `;
       });
 
       html += `
-          </div>
+            </div>
 
-          <div class="day-recap">
-            <h3>KEY LESSON</h3>
-            <p>${day.learned}</p>
-            <h3>FUTURE PRACTICE</h3>
-            <p>${day.futurePractice}</p>
+            <div class="day-recap">
+              <h3>KEY LESSON</h3>
+              <p>${day.learned}</p>
+
+              <h3>FUTURE PRACTICE</h3>
+              <p>${day.futurePractice}</p>
+            </div>
+
           </div>
 
         </section>
       `;
-
     });
 
     content.innerHTML = html;
 
     /* ==========================
-       SCROLLYTELLING OBSERVER
+       ACTIVE DAY
        ========================== */
-
-    const dayBlocks = content.querySelectorAll('.day-block');
 
     let activeDay = null;
     let flyTimer = null;
-    const intersecting = new Map();
 
     function fitDay(dayId) {
 
       const day = days.find(d => d.id === dayId);
+      if (!day) return;
+
       const bounds = new maplibregl.LngLatBounds();
-      day.stops.forEach(s => bounds.extend([s.lon, s.lat]));
+
+      day.stops.forEach(stop => {
+        bounds.extend([stop.lon, stop.lat]);
+      });
+
+      const isMobile = window.innerWidth < 768;
 
       map.fitBounds(bounds, {
-        padding: { top: 80, bottom: 80, left: 80, right: 460 },
-        duration: 900,
+        padding: isMobile
+          ? {
+              top: 100,
+              bottom: 100,
+              left: 40,
+              right: 40
+            }
+          : {
+              top: 100,
+              bottom: 100,
+              left: 80,
+              right: 500
+            },
+        duration: 1200,
         maxZoom: 14,
         essential: true
       });
-
     }
 
     function setActiveDay(dayId) {
 
-      if (dayId === activeDay) return;
+      if (activeDay === dayId) return;
+
       activeDay = dayId;
 
-      stopMeta.forEach(m => {
+      stopMeta.forEach(stop => {
         map.setFeatureState(
-          { source: 'stops', id: m.id },
-          { active: m.dayId === dayId }
+          {
+            source: 'stops',
+            id: stop.id
+          },
+          {
+            active: stop.dayId === dayId
+          }
         );
       });
 
-      document.querySelectorAll('.day-btn').forEach(btn => {
-        btn.classList.toggle('active', Number(btn.dataset.id) === dayId);
-      });
+      document
+        .querySelectorAll('.day-btn')
+        .forEach(btn => {
+          btn.classList.toggle(
+            'active',
+            Number(btn.dataset.id) === dayId
+          );
+        });
 
       clearTimeout(flyTimer);
-      flyTimer = setTimeout(() => fitDay(dayId), 160);
 
+      flyTimer = setTimeout(() => {
+        fitDay(dayId);
+      }, 100);
     }
 
-    const observer = new IntersectionObserver((entries) => {
-
-      entries.forEach(entry => {
-
-        const key = entry.target;
-
-        if (entry.isIntersecting) {
-          intersecting.set(key, entry);
-        } else {
-          intersecting.delete(key);
-        }
-
-      });
-
-      if (intersecting.size === 0) return;
-
-      const rootRect = content.getBoundingClientRect();
-      const centerY = rootRect.top + rootRect.height / 2;
-
-      let closest = null;
-      let closestDist = Infinity;
-
-      intersecting.forEach(entry => {
-        const r = entry.boundingClientRect;
-        const mid = r.top + r.height / 2;
-        const dist = Math.abs(mid - centerY);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closest = entry.target;
-        }
-      });
-
-      if (!closest) return;
-
-      setActiveDay(Number(closest.dataset.day));
-
-    }, {
-      root: content,
-      rootMargin: '-30% 0px -30% 0px',
-      threshold: 0
-    });
-
-    dayBlocks.forEach(block => observer.observe(block));
-
     /* ==========================
-       DAY BUTTON JUMP
+       OBSERVE SECTIONS
        ========================== */
 
-    document.querySelectorAll('.day-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const dayId = btn.dataset.id;
-        const target = content.querySelector(`.day-block[data-day="${dayId}"]`);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+    const dayBlocks =
+      document.querySelectorAll('.day-block');
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            const dayId =
+              Number(entry.target.dataset.day);
+
+            setActiveDay(dayId);
+          });
+        },
+        {
+          threshold: 0.6
+        }
+      );
+
+    dayBlocks.forEach(block => {
+      observer.observe(block);
     });
 
     /* ==========================
-       FADE TOP WHILE SCROLLING
+       FADE + SLIDE
        ========================== */
 
-    content.addEventListener('scroll', () => {
-      const fade = Math.min(content.scrollTop, 100);
-      content.style.setProperty('--fade-top', `${fade}px`);
+    const panelObserver =
+      new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            entry.target.classList.toggle(
+              'active',
+              entry.isIntersecting
+            );
+          });
+        },
+        {
+          threshold: 0.55
+        }
+      );
+
+    dayBlocks.forEach(block => {
+      panelObserver.observe(block);
     });
+
+    /* ==========================
+       BUTTON NAVIGATION
+       ========================== */
+
+    document
+      .querySelectorAll('.day-btn')
+      .forEach(btn => {
+
+        btn.addEventListener(
+          'click',
+          () => {
+
+            const dayId =
+              Number(btn.dataset.id);
+
+            const target =
+              document.querySelector(
+                `.day-block[data-day="${dayId}"]`
+              );
+
+            if (!target) return;
+
+            window.scrollTo({
+              top: target.offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        );
+
+      });
+
+    /* ==========================
+       INIT
+       ========================== */
+
+    if (days.length) {
+      setTimeout(() => {
+        setActiveDay(days[0].id);
+      }, 500);
+    }
 
   });
