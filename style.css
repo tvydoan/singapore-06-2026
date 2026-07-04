@@ -8,8 +8,8 @@ body{
   font-family:
     -apple-system,
     BlinkMacSystemFont,
-    "SF Pro Display",
-    "Segoe UI",
+    "Helvetica",
+    "Helvetica",
     sans-serif;
 }
 
@@ -42,10 +42,10 @@ body{
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
 
-  border:1px solid rgba(255,255,255,.12);
+  border:3px solid rgba(255,255,255,.12);
 
   color:white;
-  font-size:14px;
+  font-size:10px;
   font-weight:600;
   letter-spacing:2px;
 
@@ -75,7 +75,7 @@ body{
   padding:28px;
   box-sizing:border-box;
 
-  border-radius:32px;
+  border-radius:20px;
 
   background:rgba(12,12,12,.68);
 
@@ -101,14 +101,14 @@ body{
 /* ---------- HEADER ---------- */
 
 #content h1{
-  font-size:clamp(2rem,4vw,3.8rem);
+  font-size:clamp(1rem,3vw,3rem);
   line-height:0.95;
   margin-bottom:18px;
   color:white;
 }
 
 .subtitle{
-  font-size:1.05rem;
+  font-size:0.6rem;
   color:rgba(255,255,255,.7);
   margin-bottom:26px;
 }
@@ -124,7 +124,7 @@ body{
 }
 
 #content h2{
-  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-size:clamp(1rem,3vw,2rem);
   line-height:1.05;
   color:white;
   margin-bottom:10px;
@@ -137,7 +137,7 @@ body{
 
 #content h3{
   color:#f4c84a;
-  font-size:.85rem;
+  font-size:.55rem;
   letter-spacing:3px;
   text-transform:uppercase;
   margin-top:28px;
@@ -163,7 +163,7 @@ body{
 
 /* ---------- TABLET ---------- */
 
-@media (max-width:1024px){
+@media (max-width:900px){
 
   #content{
     width:360px;
@@ -175,26 +175,26 @@ body{
 
 /* ---------- MOBILE ---------- */
 
-@media (max-width:768px){
+@media (max-width:500px){
 
   .day-buttons{
     top:20px;
     left:50%;
     transform:translateX(-50%);
-    width:95%;
+    width:80%;
     justify-content:center;
     gap:10px;
   }
 
   .day-btn{
     padding:12px 16px;
-    font-size:13px;
+    font-size:10px;
     letter-spacing:1px;
   }
 
   #content{
     top:110px;
-    right:16px;
+    right:12px;
     left:auto;
     transform:none;
 
@@ -208,15 +208,15 @@ body{
   }
 
   #content h1{
-    font-size:1.9rem;
+    font-size:1.5rem;
   }
 
   #content h2{
-    font-size:1.7rem;
+    font-size:1rem;
   }
 
   .subtitle{
-    font-size:0.95rem;
+    font-size:0.55rem;
   }
 
   #content img{
