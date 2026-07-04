@@ -46,10 +46,10 @@ body{
   border:none;
   border-radius:800px;
 
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.10);
 
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);
 
   border:2px solid rgba(255,255,255,.12);
 
@@ -86,7 +86,7 @@ body{
 
   border-radius:20px;
 
-  background:rgba(12,12,12,.40);
+  background:rgba(12,12,12,.30);
 
   backdrop-filter:blur(30px);
   -webkit-backdrop-filter:blur(30px);
