@@ -7,28 +7,39 @@
     "lon":106.6565424,
     "image":"images/HCMC.jpg",
     "description":"Beginning my first international internship journey to Singapore.",
-    "lesson":"Professional opportunities often come from being prepared."
+    "lesson":"Professional opportunities often come from being prepared and open to new experiences."
   },
 
   {
     "id":2,
-    "title":"National University of Singapore",
+    "title":"CPG Singapore Conference",
     "day":"Day 2",
-    "lat":1.2966,
-    "lon":103.7764,
-    "image":"images/NUS.jpg",
-    "description":"Visited one of Asia's leading research universities.",
-    "lesson":"Research and practice can be integrated in sustainable design."
+    "lat":1.2820,
+    "lon":103.8510,
+    "image":"images/CPG.jpg",
+    "description":"Participated in professional discussions on sustainable design and modular construction.",
+    "lesson":"Collaboration and interdisciplinary thinking are essential for future practice."
   },
 
   {
     "id":3,
-    "title":"Malaysia Stop",
+    "title":"National University of Singapore",
     "day":"Day 3",
+    "lat":1.2966,
+    "lon":103.7764,
+    "image":"images/NUS.jpg",
+    "description":"Visited one of Asia's leading research universities and explored its academic environment.",
+    "lesson":"Research and practice can be integrated to address climate-responsive design."
+  },
+
+  {
+    "id":4,
+    "title":"Malaysia Stop",
+    "day":"Day 4",
     "lat":1.4927,
     "lon":103.7414,
     "image":"images/MALAY.jpg",
-    "description":"Visited Johor Bahru and experienced cross-border urban dynamics.",
-    "lesson":"Regional connectivity strongly influences urban development."
+    "description":"Experienced the relationship between Singapore and Johor Bahru.",
+    "lesson":"Regional connectivity strongly shapes metropolitan development."
   }
 ]
