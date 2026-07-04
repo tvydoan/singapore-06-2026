@@ -214,10 +214,10 @@ body{
     left:auto;
     transform:none;
 
-    width:160px;            /* box nhỏ */
-    max-width:160px;
+    width:200px;            /* box nhỏ */
+    max-width:200px;
 
-    max-height:32vh;
+    max-height:20vh;
     overflow-y:auto;
 
     padding:14px;
