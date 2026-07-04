@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("glacial-indifference.regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Glacial Indifference";
+  src: url("glacial-indifference.bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 html,
 body{
   margin:0;
