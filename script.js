@@ -1,108 +1,106 @@
 const map = new maplibregl.Map({
   container: 'map',
-
   style:
-  'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
-
+    'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
   center: [103.8, 3],
   zoom: 4
 });
 
 fetch('data.json')
-.then(res => res.json())
-.then(data => {
+  .then(res => res.json())
+  .then(data => {
 
-  const coordinates = [];
+    const coordinates = [];
 
-  data.forEach(p => {
+    data.forEach(p => {
 
-    coordinates.push([p.lon, p.lat]);
+      coordinates.push([p.lon, p.lat]);
 
-    const el = document.createElement('div');
-    el.className = 'dot';
+      const el = document.createElement('div');
+      el.className = 'dot';
 
-    new maplibregl.Marker({
-      element: el
-    })
-      .setLngLat([p.lon, p.lat])
-      .addTo(map);
+      new maplibregl.Marker({
+        element: el
+      })
+        .setLngLat([p.lon, p.lat])
+        .addTo(map);
 
-  });
+    });
 
-  map.on('load', () => {
+    map.on('load', () => {
 
-    map.addSource('journey', {
-      type: 'geojson',
-      data: {
-        type: 'Feature',
-        geometry: {
-          type: 'LineString',
-          coordinates: coordinates
+      map.addSource('journey', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          geometry: {
+            type: 'LineString',
+            coordinates: coordinates
+          }
         }
-      }
-    });
+      });
 
-    map.addLayer({
-      id: 'journey',
-      type: 'line',
-      source: 'journey',
-      paint: {
-        'line-color': '#d8d8d8',
-        'line-width': 2,
-        'line-opacity': 0.8
-      }
-    });
-
-  });
-
-  function showStory(id){
-
-    const p = data.find(
-      item => item.id == id
-    );
-
-    if(!p) return;
-
-    document.getElementById('content').innerHTML = `
-      <h1>A Journey of Learning</h1>
-
-      <div class="subtitle">
-        Singapore Internship Experience 2026
-      </div>
-
-      <img src="${p.image}">
-
-      <h2>${p.title}</h2>
-
-      <div class="day">${p.day}</div>
-
-      <h3>WHAT I SAW</h3>
-      <p>${p.whatISaw}</p>
-
-      <h3>KEY LESSON</h3>
-      <p>${p.whatILearned}</p>
-
-      <h3>FUTURE PRACTICE</h3>
-      <p>${p.futurePractice}</p>
-    `;
-
-    map.flyTo({
-      center:[p.lon,p.lat],
-      zoom:8,
-      duration:2000
-    });
-  }
-
-  document
-    .querySelectorAll('.day-btn')
-    .forEach(btn => {
-
-      btn.addEventListener('click', () => {
-        showStory(btn.dataset.id);
+      map.addLayer({
+        id: 'journey',
+        type: 'line',
+        source: 'journey',
+        paint: {
+          'line-color': '#d8d8d8',
+          'line-width': 2,
+          'line-opacity': 0.8
+        }
       });
 
     });
 
-  showStory(1);
+    function showStory(id){
 
-});
+      const p = data.find(
+        item => item.id == id
+      );
+
+      if(!p) return;
+
+      document.getElementById('content').innerHTML = `
+        <h1>A Journey of Learning</h1>
+
+        <div class="subtitle">
+          Singapore Internship Experience 2026
+        </div>
+
+        <img src="${p.image}">
+
+        <h2>${p.title}</h2>
+
+        <div class="day">${p.day}</div>
+
+        <h3>WHAT I SAW</h3>
+        <p>${p.whatISaw}</p>
+
+        <h3>KEY LESSON</h3>
+        <p>${p.whatILearned}</p>
+
+        <h3>FUTURE PRACTICE</h3>
+        <p>${p.futurePractice}</p>
+      `;
+
+      map.flyTo({
+        center:[p.lon,p.lat],
+        zoom:8,
+        duration:2000
+      });
+    }
+
+    document
+      .querySelectorAll('.day-btn')
+      .forEach(btn => {
+
+        btn.addEventListener('click', () => {
+          showStory(btn.dataset.id);
+        });
+
+      });
+
+    showStory(1);
+
+  });
