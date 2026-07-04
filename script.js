@@ -2,14 +2,14 @@ const map = new maplibregl.Map({
 container:'map',
 
 style:
-'https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json',
+'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
 
 center:[103.8,1.35],
 zoom:4
 });
 
 fetch('data.json')
-.then(res=>res.json())
+.then(response=>response.json())
 .then(data=>{
 
 const coordinates=[];
@@ -21,7 +21,10 @@ coordinates.push([p.lon,p.lat]);
 const el=document.createElement('div');
 el.className='marker';
 
-new maplibregl.Marker(el)
+new maplibregl.Marker({
+element:el,
+anchor:'center'
+})
 .setLngLat([p.lon,p.lat])
 .addTo(map);
 
@@ -30,6 +33,7 @@ showPoint(p);
 });
 
 const card=document.createElement('div');
+
 card.className='timeline-card';
 
 card.innerHTML=`
@@ -65,8 +69,10 @@ id:'journey',
 type:'line',
 source:'journey',
 paint:{
-'line-color':'#f7c948',
-'line-width':4
+'line-color':'#d4d4d4',
+'line-width':2,
+'line-opacity':0.6,
+'line-blur':1
 }
 });
 
