@@ -5,6 +5,9 @@ const map = new maplibregl.Map({
   zoom: 4
 });
 
+let activePoint = null;
+const content = document.getElementById('content');
+
 fetch('data.json')
   .then(res => res.json())
   .then(data => {
@@ -24,10 +27,8 @@ fetch('data.json')
         .setLngLat([p.lon, p.lat])
         .addTo(map);
 
-      // Preload ảnh
       const img = new Image();
       img.src = p.image;
-
     });
 
     map.on('load', () => {
@@ -62,7 +63,9 @@ fetch('data.json')
 
       if(!p) return;
 
-      document.getElementById('content').innerHTML = `
+      activePoint = [p.lon, p.lat];
+
+      content.innerHTML = `
         <h1>A Journey of Learning</h1>
 
         <div class="subtitle">
@@ -85,9 +88,11 @@ fetch('data.json')
         <p>${p.futurePractice}</p>
       `;
 
+      content.style.opacity = 1;
+
       map.flyTo({
         center: [p.lon, p.lat],
-        zoom: 11,          // Zoom gần hơn
+        zoom: 11,
         duration: 1800,
         speed: 0.9,
         curve: 1.1,
@@ -107,5 +112,50 @@ fetch('data.json')
       });
 
     showStory(1);
+
+    /* ==========================
+       FADE CARD WHEN MOVING MAP
+       ========================== */
+
+    map.on('move', () => {
+
+      if (!activePoint) return;
+
+      const center = map.getCenter();
+
+      const dx =
+        center.lng - activePoint[0];
+
+      const dy =
+        center.lat - activePoint[1];
+
+      const distance =
+        Math.sqrt(dx * dx + dy * dy);
+
+      const opacity =
+        Math.max(0, 1 - distance * 35);
+
+      content.style.opacity = opacity;
+    });
+
+    map.on('moveend', () => {
+
+      if (!activePoint) return;
+
+      const center = map.getCenter();
+
+      const dx =
+        center.lng - activePoint[0];
+
+      const dy =
+        center.lat - activePoint[1];
+
+      const distance =
+        Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 0.01) {
+        content.style.opacity = 1;
+      }
+    });
 
   });
