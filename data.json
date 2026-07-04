@@ -1,35 +1,45 @@
 [
   {
-    "id": 1,
-    "title": "Departure from Ho Chi Minh City",
-    "day": "Day 1",
-    "lat": 10.81741075,
-    "lon": 106.6565424,
-    "image": "https://dhtvy7.github.io/singapore-06-2026/images/HCMC.jpg",
-    "whatISaw": "Beginning my first international internship journey.",
-    "whatILearned": "Professional opportunities often come from being prepared.",
-    "futurePractice": "Be more proactive in seeking international experiences."
+    "id":1,
+    "title":"Departure from HCMC",
+    "day":"Day 1",
+    "lat":10.8174,
+    "lon":106.6565,
+    "image":"images/HCMC.jpg",
+    "description":"Beginning my first international internship journey.",
+    "lesson":"Professional opportunities often come from being prepared."
   },
+
   {
-    "id": 2,
-    "title": "National University of Singapore",
-    "day": "Day 2",
-    "lat": 1.2966,
-    "lon": 103.7764,
-    "image": "https://dhtvy7.github.io/singapore-06-2026/images/NUS.jpg",
-    "whatISaw": "Visited one of Asia's leading research universities.",
-    "whatILearned": "Research and practice can be integrated in sustainable design.",
-    "futurePractice": "Continue pursuing climate-responsive design research."
+    "id":2,
+    "title":"CPG Singapore",
+    "day":"Day 2",
+    "lat":1.282,
+    "lon":103.851,
+    "image":"images/CPG.jpg",
+    "description":"Participated in Net Zero Summit and met professionals.",
+    "lesson":"Collaboration and sustainability are shaping the future."
   },
+
   {
-    "id": 3,
-    "title": "Malaysia Stop",
-    "day": "Day 3",
-    "lat": 1.4927,
-    "lon": 103.7414,
-    "image": "https://dhtvy7.github.io/singapore-06-2026/images/MALAY.jpg",
-    "whatISaw": "Visited Johor Bahru and experienced cross-border urban dynamics.",
-    "whatILearned": "Regional connectivity strongly influences urban development.",
-    "futurePractice": "Pay more attention to metropolitan-scale planning."
+    "id":3,
+    "title":"National University of Singapore",
+    "day":"Day 3",
+    "lat":1.2966,
+    "lon":103.7764,
+    "image":"images/NUS.jpg",
+    "description":"Visited NUS and explored its research environment.",
+    "lesson":"Research and practice can be integrated."
+  },
+
+  {
+    "id":4,
+    "title":"Malaysia Stop",
+    "day":"Day 4",
+    "lat":1.4927,
+    "lon":103.7414,
+    "image":"images/MALAY.jpg",
+    "description":"Experienced cross-border urban dynamics.",
+    "lesson":"Regional connectivity shapes cities."
   }
-]
+
