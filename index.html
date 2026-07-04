@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>A Journey of Learning</title>
+<title>A Journey of Learning</title>
 
-  <link
-    href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
-    rel="stylesheet">
+<link
+href="https://unpkg.com/maplibre-gl@4.3.2/dist/maplibre-gl.css"
+rel="stylesheet"
+/>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/maplibre-gl@4.3.2/dist/maplibre-gl.js"></script>
 </head>
 
 <body>
 
 <div id="map"></div>
 
-<div id="hero">
+<div id="info-panel">
 
-  <div id="content">
+<div class="hero">
 
-    <h1>A Journey of Learning</h1>
+<h1>Love</h1>
+<p>Singapore 2026</p>
 
-    <p class="subtitle">
-      Singapore Internship Experience 2026
-    </p>
+<img id="hero-image" src="" />
 
-    <p>
-      An interactive recap of my internship and study journey across Singapore and Malaysia.
-    </p>
+<h2 id="hero-title"></h2>
+<p id="hero-day"></p>
 
-    <p>
-      Click a point or select a day below.
-    </p>
+<h3>WHAT I SAW</h3>
+<p id="hero-saw"></p>
 
-  </div>
+<h3>KEY LESSON</h3>
+<p id="hero-learned"></p>
+
+<h3>FUTURE PRACTICE</h3>
+<p id="hero-future"></p>
+
+</div>
 
 </div>
 
 <div id="timeline"></div>
 
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="script.js"></script>
 
 </body>
