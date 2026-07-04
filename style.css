@@ -18,7 +18,6 @@ body{
   width:100%;
   height:100%;
   overflow:hidden;
-
   font-family: "Glacial Indifference";
 }
 
@@ -42,7 +41,6 @@ body{
 
 .day-btn{
   padding:14px 28px;
-
   border:none;
   border-radius:800px;
 
@@ -96,6 +94,11 @@ body{
   box-shadow:
     0 20px 60px rgba(0,0,0,.45),
     inset 0 1px 0 rgba(255,255,255,.08);
+
+  /* hiệu ứng fade */
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
 }
 
 #content::-webkit-scrollbar{
@@ -220,12 +223,5 @@ body{
     padding:14px;
     border-radius:20px;
   }
-}
 
-/* ---------- CARD SWIPE EFFECT ---------- */
-
-#content{
-  transition:
-    opacity .25s ease,
-    transform .25s ease;
 }
