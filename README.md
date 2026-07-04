@@ -1,1 +1,1 @@
-# singapore-06-2026.
+# singapore-06-2026
