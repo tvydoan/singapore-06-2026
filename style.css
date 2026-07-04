@@ -20,10 +20,6 @@ body{
   scroll-behavior:smooth;
 }
 
-body{
-  scroll-snap-type:y mandatory;
-}
-
 #map{
   position:fixed;
   inset:0;
