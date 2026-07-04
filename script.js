@@ -5,7 +5,6 @@ const map = new maplibregl.Map({
   zoom: 4
 });
 
-let activePoint = null;
 const content = document.getElementById('content');
 
 fetch('data.json')
@@ -29,6 +28,7 @@ fetch('data.json')
 
       const img = new Image();
       img.src = p.image;
+
     });
 
     map.on('load', () => {
@@ -59,11 +59,11 @@ fetch('data.json')
 
     function showStory(id){
 
-      const p = data.find(item => item.id == id);
+      const p = data.find(
+        item => item.id == id
+      );
 
       if(!p) return;
-
-      activePoint = [p.lon, p.lat];
 
       content.innerHTML = `
         <h1>A Journey of Learning</h1>
@@ -89,6 +89,8 @@ fetch('data.json')
       `;
 
       content.style.opacity = 1;
+      content.style.transform =
+        'translateY(0px)';
 
       map.flyTo({
         center: [p.lon, p.lat],
@@ -105,57 +107,90 @@ fetch('data.json')
       .querySelectorAll('.day-btn')
       .forEach(btn => {
 
-        btn.addEventListener('click', () => {
-          showStory(btn.dataset.id);
-        });
+        btn.addEventListener(
+          'click',
+          () => showStory(btn.dataset.id)
+        );
 
       });
 
     showStory(1);
 
     /* ==========================
-       FADE CARD WHEN MOVING MAP
+       SWIPE DOWN TO HIDE CARD
        ========================== */
 
-    map.on('move', () => {
+    let startY = 0;
+    let currentY = 0;
+    let dragging = false;
 
-      if (!activePoint) return;
+    content.addEventListener(
+      'touchstart',
+      e => {
 
-      const center = map.getCenter();
+        startY =
+          e.touches[0].clientY;
 
-      const dx =
-        center.lng - activePoint[0];
-
-      const dy =
-        center.lat - activePoint[1];
-
-      const distance =
-        Math.sqrt(dx * dx + dy * dy);
-
-      const opacity =
-        Math.max(0, 1 - distance * 35);
-
-      content.style.opacity = opacity;
-    });
-
-    map.on('moveend', () => {
-
-      if (!activePoint) return;
-
-      const center = map.getCenter();
-
-      const dx =
-        center.lng - activePoint[0];
-
-      const dy =
-        center.lat - activePoint[1];
-
-      const distance =
-        Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 0.01) {
-        content.style.opacity = 1;
+        currentY = startY;
+        dragging = true;
       }
-    });
+    );
+
+    content.addEventListener(
+      'touchmove',
+      e => {
+
+        if (!dragging) return;
+
+        currentY =
+          e.touches[0].clientY;
+
+        const delta =
+          Math.max(
+            0,
+            currentY - startY
+          );
+
+        content.style.transform =
+          `translateY(${delta}px)`;
+
+        content.style.opacity =
+          Math.max(
+            0,
+            1 - delta / 250
+          );
+      }
+    );
+
+    content.addEventListener(
+      'touchend',
+      () => {
+
+        if (!dragging) return;
+
+        const delta =
+          Math.max(
+            0,
+            currentY - startY
+          );
+
+        if (delta > 120) {
+
+          content.style.opacity = 0;
+
+          content.style.transform =
+            'translateY(300px)';
+
+        } else {
+
+          content.style.opacity = 1;
+
+          content.style.transform =
+            'translateY(0px)';
+        }
+
+        dragging = false;
+      }
+    );
 
   });
