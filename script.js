@@ -21,8 +21,8 @@ fetch('data.json')
       new maplibregl.Marker({
         element: el
       })
-      .setLngLat([p.lon, p.lat])
-      .addTo(map);
+        .setLngLat([p.lon, p.lat])
+        .addTo(map);
 
       // Preload ảnh
       const img = new Image();
@@ -85,22 +85,14 @@ fetch('data.json')
         <p>${p.futurePractice}</p>
       `;
 
-      // Zoom ra trước
-      map.easeTo({
-        zoom: 4,
-        duration: 500
+      map.flyTo({
+        center: [p.lon, p.lat],
+        zoom: 9,          // Zoom gần hơn
+        duration: 1800,
+        speed: 0.9,
+        curve: 1.1,
+        essential: true
       });
-
-      // Sau đó bay tới điểm mới
-      setTimeout(() => {
-        map.flyTo({
-          center: [p.lon, p.lat],
-          zoom: 7,
-          speed: 0.6,
-          curve: 1.8,
-          essential: true
-        });
-      }, 500);
 
     }
 
