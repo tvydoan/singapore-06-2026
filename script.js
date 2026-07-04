@@ -88,8 +88,9 @@ fetch('data.json')
         <p>${p.futurePractice}</p>
       `;
 
-      content.style.opacity = 1;
+      // reset card
       content.scrollTop = 0;
+      content.style.opacity = 1;
 
       map.flyTo({
         center: [p.lon, p.lat],
@@ -116,66 +117,33 @@ fetch('data.json')
     showStory(1);
 
     /* ==========================
-       DRAG DOWN TO FADE
-       WEB + MOBILE
+       FADE WHEN SCROLLING CARD
        ========================== */
 
-    let startY = 0;
-    let dragging = false;
+    content.addEventListener('scroll', () => {
 
-    content.addEventListener('pointerdown', e => {
-      startY = e.clientY;
-      dragging = true;
-    });
+      const maxScroll =
+        content.scrollHeight -
+        content.clientHeight;
 
-    window.addEventListener('pointermove', e => {
+      if (maxScroll <= 0) {
+        content.style.opacity = 1;
+        return;
+      }
 
-      if (!dragging) return;
-
-      const delta =
-        e.clientY - startY;
-
-      if (delta <= 0) return;
+      const progress =
+        content.scrollTop /
+        maxScroll;
 
       const opacity =
         Math.max(
-          0,
-          1 - delta / 220
+          0.3,
+          1 - progress * 0.8
         );
 
       content.style.opacity =
         opacity;
+
     });
-
-    window.addEventListener('pointerup', e => {
-
-      if (!dragging) return;
-
-      const delta =
-        e.clientY - startY;
-
-      if (delta > 120) {
-
-        content.style.opacity = 0;
-        content.style.pointerEvents = 'none';
-
-      } else {
-
-        content.style.opacity = 1;
-      }
-
-      dragging = false;
-    });
-
-    document
-      .querySelectorAll('.day-btn')
-      .forEach(btn => {
-
-        btn.addEventListener('click', () => {
-          content.style.pointerEvents =
-            'auto';
-        });
-
-      });
 
   });
