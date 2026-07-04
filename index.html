@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>A Journey of Learning</title>
 
   <link
     href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
-    rel="stylesheet"
-  />
+    rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="sidebar">
+<div id="map"></div>
+
+<div id="hero">
 
   <h1>A Journey of Learning</h1>
-  <h2>Singapore Internship Experience 2026</h2>
 
-  <div id="timeline"></div>
+  <p class="subtitle">
+    Singapore Internship Experience 2026
+  </p>
 
   <div id="content">
-    Select a stop to begin the journey.
+
+    <p>
+      An interactive recap of my internship and study journey
+      across Singapore and Malaysia.
+    </p>
+
+    <p>
+      Click a point on the map or select a stop below.
+    </p>
+
   </div>
 
 </div>
 
-<div id="map"></div>
+<div id="timeline"></div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script src="script.js"></script>
