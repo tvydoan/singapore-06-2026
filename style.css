@@ -45,7 +45,7 @@ body{
   border-radius:800px;
   background:rgba(255,255,255,.0.6);
 
-  backdrop-filter:blur(30px);
+  backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(30px);
 
   border:2px solid rgba(255,255,255,.10);
