@@ -226,7 +226,7 @@ body{
 }
 
 .day-recap h3{
-  color:#60aedb;
+  color:var(--day-color);
   font-size:.85rem;
   letter-spacing:3px;
   text-transform:uppercase;
