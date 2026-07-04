@@ -151,91 +151,186 @@ fetch('data.json')
        SCROLLYTELLING OBSERVER
        ========================== */
 
-    const dayBlocks = content.querySelectorAll('.day-block');
+    const dayBlocks =
+  content.querySelectorAll('.day-block');
 
-    let activeDay = null;
-    let flyTimer = null;
-    const intersecting = new Map();
+let activeDay = null;
+let flyTimer = null;
+const intersecting = new Map();
 
-    function fitDay(dayId) {
+function fitDay(dayId) {
 
-      const day = days.find(d => d.id === dayId);
-      const bounds = new maplibregl.LngLatBounds();
-      day.stops.forEach(s => bounds.extend([s.lon, s.lat]));
+  const day = days.find(
+    d => d.id === dayId
+  );
 
-      map.fitBounds(bounds, {
-        padding: { top: 80, bottom: 80, left: 80, right: 460 },
-        duration: 900,
-        maxZoom: 14,
-        essential: true
-      });
+  if (!day) return;
 
-    }
+  const bounds =
+    new maplibregl.LngLatBounds();
 
-    function setActiveDay(dayId) {
+  day.stops.forEach(stop => {
+    bounds.extend([
+      stop.lon,
+      stop.lat
+    ]);
+  });
 
-      if (dayId === activeDay) return;
-      activeDay = dayId;
+  const isMobile =
+    window.innerWidth <= 500;
 
-      stopMeta.forEach(m => {
-        map.setFeatureState(
-          { source: 'stops', id: m.id },
-          { active: m.dayId === dayId }
-        );
-      });
+  map.fitBounds(bounds, {
+    padding: isMobile
+      ? {
+          top: 90,
+          bottom: 320,
+          left: 30,
+          right: 30
+        }
+      : {
+          top: 80,
+          bottom: 80,
+          left: 80,
+          right: 460
+        },
 
-      document.querySelectorAll('.day-btn').forEach(btn => {
-        btn.classList.toggle('active', Number(btn.dataset.id) === dayId);
-      });
+    duration: 900,
+    maxZoom: isMobile ? 16 : 14,
+    essential: true
+  });
+}
 
-      clearTimeout(flyTimer);
-      flyTimer = setTimeout(() => fitDay(dayId), 160);
+function setActiveDay(dayId) {
 
-    }
+  if (dayId === activeDay)
+    return;
 
-    const observer = new IntersectionObserver((entries) => {
+  activeDay = dayId;
+
+  stopMeta.forEach(m => {
+    map.setFeatureState(
+      {
+        source: 'stops',
+        id: m.id
+      },
+      {
+        active:
+          m.dayId === dayId
+      }
+    );
+  });
+
+  document
+    .querySelectorAll('.day-btn')
+    .forEach(btn => {
+      btn.classList.toggle(
+        'active',
+        Number(btn.dataset.id) ===
+          dayId
+      );
+    });
+
+  clearTimeout(flyTimer);
+
+  flyTimer = setTimeout(() => {
+    fitDay(dayId);
+  }, 150);
+}
+
+const observer =
+  new IntersectionObserver(
+    entries => {
 
       entries.forEach(entry => {
 
-        const key = entry.target;
+        const key =
+          entry.target;
 
         if (entry.isIntersecting) {
-          intersecting.set(key, entry);
+          intersecting.set(
+            key,
+            entry
+          );
         } else {
-          intersecting.delete(key);
+          intersecting.delete(
+            key
+          );
         }
-
       });
 
-      if (intersecting.size === 0) return;
+      if (
+        intersecting.size === 0
+      )
+        return;
 
-      const rootRect = content.getBoundingClientRect();
-      const centerY = rootRect.top + rootRect.height / 2;
+      const rootRect = {
+        top: 0,
+        height:
+          window.innerHeight
+      };
+
+      const centerY =
+        rootRect.top +
+        rootRect.height / 2;
 
       let closest = null;
-      let closestDist = Infinity;
+      let closestDist =
+        Infinity;
 
-      intersecting.forEach(entry => {
-        const r = entry.boundingClientRect;
-        const mid = r.top + r.height / 2;
-        const dist = Math.abs(mid - centerY);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closest = entry.target;
+      intersecting.forEach(
+        entry => {
+
+          const r =
+            entry.boundingClientRect;
+
+          const mid =
+            r.top +
+            r.height / 2;
+
+          const dist =
+            Math.abs(
+              mid - centerY
+            );
+
+          if (
+            dist <
+            closestDist
+          ) {
+            closestDist =
+              dist;
+            closest =
+              entry.target;
+          }
         }
-      });
+      );
 
       if (!closest) return;
 
-      setActiveDay(Number(closest.dataset.day));
-
-    }, {
-      root: content,
-      rootMargin: '-30% 0px -30% 0px',
+      setActiveDay(
+        Number(
+          closest.dataset.day
+        )
+      );
+    },
+    {
+      root: null,
+      rootMargin:
+        '-35% 0px -35% 0px',
       threshold: 0
-    });
+    }
+  );
 
-    dayBlocks.forEach(block => observer.observe(block));
+dayBlocks.forEach(block => {
+  observer.observe(block);
+});
+
+setTimeout(() => {
+  if (days.length) {
+    setActiveDay(
+      days[0].id
+    );
+  }
+}, 500);
 
     /* ==========================
        DAY BUTTON JUMP
