@@ -72,7 +72,7 @@ fetch('data.json')
     days.forEach(day => {
 
       html += `
-        <section class="day-block" style="--day-color:${day.color}">
+        <section class="day-block" data-day="${day.id}" style="--day-color:${day.color}">
 
           <div class="day-header">
             <span class="day-tag">${day.label}</span>
@@ -117,35 +117,34 @@ fetch('data.json')
        SCROLLYTELLING OBSERVER
        ========================== */
 
-    const stopBlocks = content.querySelectorAll('.stop-block');
+    const dayBlocks = content.querySelectorAll('.day-block');
 
-    let activeKey = null;
+    let activeDay = null;
     let flyTimer = null;
     const intersecting = new Map();
 
-    function centerFly(dayId, index) {
+    function fitDay(dayId) {
 
       const day = days.find(d => d.id === dayId);
-      const stop = day.stops[index];
+      const bounds = new maplibregl.LngLatBounds();
+      day.stops.forEach(s => bounds.extend([s.lon, s.lat]));
 
-      map.flyTo({
-        center: [stop.lon, stop.lat],
-        zoom: 14.5,
+      map.fitBounds(bounds, {
+        padding: { top: 80, bottom: 80, left: 80, right: 460 },
         duration: 900,
-        curve: 1.2,
+        maxZoom: 14,
         essential: true
       });
 
     }
 
-    function setActive(dayId, index) {
+    function setActiveDay(dayId) {
 
-      const key = `${dayId}-${index}`;
-      if (key === activeKey) return;
-      activeKey = key;
+      if (dayId === activeDay) return;
+      activeDay = dayId;
 
       markers.forEach(m => {
-        m.el.classList.toggle('active', m.dayId === dayId && m.index === index);
+        m.el.classList.toggle('active', m.dayId === dayId);
       });
 
       document.querySelectorAll('.day-btn').forEach(btn => {
@@ -153,7 +152,7 @@ fetch('data.json')
       });
 
       clearTimeout(flyTimer);
-      flyTimer = setTimeout(() => centerFly(dayId, index), 160);
+      flyTimer = setTimeout(() => fitDay(dayId), 160);
 
     }
 
@@ -191,15 +190,15 @@ fetch('data.json')
 
       if (!closest) return;
 
-      setActive(Number(closest.dataset.day), Number(closest.dataset.index));
+      setActiveDay(Number(closest.dataset.day));
 
     }, {
       root: content,
-      rootMargin: '-35% 0px -35% 0px',
+      rootMargin: '-30% 0px -30% 0px',
       threshold: 0
     });
 
-    stopBlocks.forEach(block => observer.observe(block));
+    dayBlocks.forEach(block => observer.observe(block));
 
     /* ==========================
        DAY BUTTON JUMP
@@ -208,8 +207,8 @@ fetch('data.json')
     document.querySelectorAll('.day-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const dayId = btn.dataset.id;
-        const target = content.querySelector(`.stop-block[data-day="${dayId}"]`);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const target = content.querySelector(`.day-block[data-day="${dayId}"]`);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
