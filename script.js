@@ -24,8 +24,8 @@ fetch('data.json')
     new maplibregl.Marker({
       element: el
     })
-    .setLngLat([p.lon, p.lat])
-    .addTo(map);
+      .setLngLat([p.lon, p.lat])
+      .addTo(map);
 
   });
 
@@ -47,7 +47,7 @@ fetch('data.json')
       type: 'line',
       source: 'journey',
       paint: {
-        'line-color': '#d9d9d9',
+        'line-color': '#d8d8d8',
         'line-width': 2,
         'line-opacity': 0.8
       }
@@ -66,15 +66,15 @@ fetch('data.json')
     document.getElementById('content').innerHTML = `
       <h1>A Journey of Learning</h1>
 
-      <p class="subtitle">
+      <div class="subtitle">
         Singapore Internship Experience 2026
-      </p>
+      </div>
 
       <img src="${p.image}">
 
       <h2>${p.title}</h2>
 
-      <p>${p.day}</p>
+      <div class="day">${p.day}</div>
 
       <h3>WHAT I SAW</h3>
       <p>${p.whatISaw}</p>
@@ -87,9 +87,9 @@ fetch('data.json')
     `;
 
     map.flyTo({
-      center: [p.lon, p.lat],
-      zoom: 10,
-      duration: 2000
+      center:[p.lon,p.lat],
+      zoom:8,
+      duration:2000
     });
   }
 
