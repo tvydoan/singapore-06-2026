@@ -43,7 +43,7 @@ body{
   padding:14px 28px;
 
   border-radius:800px;
-  background:rgba(255,255,255,.10);
+  background:rgba(255,255,255,.0.6);
 
   backdrop-filter:blur(30px);
   -webkit-backdrop-filter:blur(30px);
@@ -60,11 +60,11 @@ body{
 }
 
 .day-btn:hover{
-  background:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.12);
 }
 
 .day-btn.active{
-  background:rgba(255,255,255,.28);
+  background:rgba(255,255,255,.20);
   border-color:rgba(255,255,255,.4);
 }
 
@@ -88,7 +88,7 @@ body{
 
   border-radius:20px;
 
-  background:rgba(12,12,12,.20);
+  background:rgba(12,12,12,.0.8);
 
   backdrop-filter:blur(30px);
   -webkit-backdrop-filter:blur(30px);
