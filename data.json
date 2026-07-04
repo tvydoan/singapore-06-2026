@@ -1,49 +1,49 @@
 [
-  {
-    "id":1,
-    "title":"Departure from Ho Chi Minh City",
-    "day":"Day x",
-    "lat":10.81741075,
-    "lon":106.6565424,
-    "image":"images/HCMC.jpg",
-    "whatISaw":"Beginning my first international internship journey to Singapore.",
-    "whatILearned":"Professional opportunities often come from being prepared and open to new experiences.",
-    "futurePractice":"Be more proactive in seeking international collaborations and opportunities."
-  },
+{
+"id":1,
+"title":"Departure from Ho Chi Minh City",
+"day":"Day 1",
+"lat":10.81741075,
+"lon":106.6565424,
+"image":"images/HCMC.jpg",
+"whatISaw":"Beginning my first international internship journey to Singapore.",
+"whatILearned":"Professional opportunities often come from being prepared and open to new experiences.",
+"futurePractice":"Be more proactive in seeking international collaborations."
+},
 
-  {
-    "id":2,
-    "title":"CPG Singapore Conference",
-    "day":"Day x",
-    "lat":1.2905,
-    "lon":103.8519,
-    "image":"images/CPG.jpg",
-    "whatISaw":"Participated in discussions on sustainable design and modular construction.",
-    "whatILearned":"Collaboration and interdisciplinary thinking are essential for future practice.",
-    "futurePractice":"Integrate design, engineering and sustainability perspectives into my projects."
-  },
+{
+"id":2,
+"title":"CPG Singapore Conference",
+"day":"Day 2",
+"lat":1.2905,
+"lon":103.8519,
+"image":"images/CPG.jpg",
+"whatISaw":"Participated in professional discussions on sustainable design and modular construction.",
+"whatILearned":"Collaboration and interdisciplinary thinking are essential for future practice.",
+"futurePractice":"Integrate sustainability and engineering thinking into future projects."
+},
 
-  {
-    "id":3,
-    "title":"National University of Singapore",
-    "day":"Day x",
-    "lat":1.2966,
-    "lon":103.7764,
-    "image":"images/NUS.jpg",
-    "whatISaw":"Visited one of Asia's leading research universities.",
-    "whatILearned":"Research and practice can be integrated in climate-responsive design.",
-    "futurePractice":"Continue pursuing environmental simulation and sustainable architecture research."
-  },
+{
+"id":3,
+"title":"National University of Singapore",
+"day":"Day 3",
+"lat":1.2966,
+"lon":103.7764,
+"image":"images/NUS.jpg",
+"whatISaw":"Visited one of Asia's leading research universities.",
+"whatILearned":"Research and practice can be integrated in climate-responsive design.",
+"futurePractice":"Continue pursuing environmental simulation and sustainable architecture research."
+},
 
-  {
-    "id":4,
-    "title":"Malaysia Stop",
-    "day":"Day x",
-    "lat":1.4927,
-    "lon":103.7414,
-    "image":"images/MALAY.jpg",
-    "whatISaw":"Experienced cross-border urban dynamics between Singapore and Johor Bahru.",
-    "whatILearned":"Regional connectivity strongly influences metropolitan development.",
-    "futurePractice":"Pay greater attention to metropolitan-scale planning and regional cooperation."
-  }
+{
+"id":4,
+"title":"Malaysia Stop",
+"day":"Day 4",
+"lat":1.4927,
+"lon":103.7414,
+"image":"images/MALAY.jpg",
+"whatISaw":"Experienced cross-border urban dynamics between Singapore and Johor Bahru.",
+"whatILearned":"Regional connectivity strongly influences metropolitan development.",
+"futurePractice":"Pay greater attention to metropolitan-scale planning."
+}
 ]
