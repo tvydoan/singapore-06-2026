@@ -1,70 +1,33 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<meta charset="utf-8">
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>A Journey of Learning</title>
 
-<title>Singapore 2026</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-<link
-href="https://unpkg.com/maplibre-gl@4.3.2/dist/maplibre-gl.css"
-rel="stylesheet">
+  <link
+    href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"
+    rel="stylesheet"
+  >
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://unpkg.com/maplibre-gl@4.3.2/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
 </head>
 
 <body>
 
 <div id="map"></div>
 
-<div id="info-panel">
-
-<div class="hero">
-
-<h1>A Journey of Learning</h1>
-
-<p class="subtitle">
-Singapore Internship Experience 2026
-</p>
-
-<img id="hero-image">
-
-<h2 id="hero-title"></h2>
-
-<p id="hero-day"></p>
-
-<h3>WHAT I SAW</h3>
-<p id="hero-saw"></p>
-
-<h3>KEY LESSON</h3>
-<p id="hero-learned"></p>
-
-<h3>FUTURE PRACTICE</h3>
-<p id="hero-future"></p>
-
-</div>
-
-</div>
-
 <div id="timeline"></div>
+
+<div id="panel">
+  <div id="content"></div>
+</div>
 
 <script src="script.js"></script>
 
