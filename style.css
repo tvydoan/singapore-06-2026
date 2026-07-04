@@ -5,12 +5,7 @@ body{
   height:100%;
   overflow:hidden;
 
-  font-family:
-    -apple-system,
-    Helvetica,
-    "Helvetica",
-    "Helvetica",
-    helvetica;
+  font-family: "Glacial Indifference", sans-serif;
 }
 
 #map{
