@@ -120,7 +120,6 @@ fetch('data.json?v=' + Date.now())
       day.stops.forEach((stop, index) => {
         html += `
           <div class="stop-block" data-day="${day.id}" data-index="${index}">
-            <div class="stop-marker" style="--dot-color:${day.color}">${stop.icon || ''}</div>
             <div class="stop-body">
               <h3 class="stop-title">${stop.title}</h3>
               ${stop.caption ? `<p class="stop-caption">${stop.caption}</p>` : ''}
