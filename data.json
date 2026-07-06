@@ -75,6 +75,14 @@
           "image": null
         },
         {
+          "title": "WATG and Wimberly Interiors",
+          "type": "leisure",
+          "lat": 1.2980611525966272,
+          "lon": 103.84420061615138,
+          "caption": "",
+          "image": null
+        },
+        {
           "title": "Kinokuniya (Ngee Ann City)",
           "type": "leisure",
           "lat": 1.3039,
@@ -125,7 +133,23 @@
       "futurePractice": "...",
       "stops": [
         {
-          "title": "URA City Gallery",
+          "title": "LASALLE",
+          "type": "academic",
+          "lat": 1.3029592302666921,
+          "lon": 103.8516989498321,
+          "caption": "",
+          "image": null
+        },
+        {
+          "title": "Parkroyal on Pickering",
+          "type": "academic",
+          "lat": 1.285926239439351,
+          "lon": 103.8460355661394,
+          "caption": "",
+          "image": null
+        },
+        {
+          "title": "Singapore City Gallery",
           "type": "academic",
           "lat": 1.2799,
           "lon": 103.8437,
@@ -133,12 +157,28 @@
           "image": null
         },
         {
-          "title": "ArtScience Museum",
+          "title": "Marina Bay Sands",
           "type": "culture",
-          "lat": 1.2862,
-          "lon": 103.8592,
+          "lat": 1.283927442655927,
+          "lon": 103.85909319912916,
           "caption": "",
           "image": null
+        },
+        {
+          "title": "Flower Dome",
+          "type": "culture",
+          "lat": 1.284692024703419,
+          "lon": 103.86465377548755,
+          "caption": "",
+          "image": null
+        },
+        {
+          "title": "Malay Garden",
+          "type": "culture",
+          "lat": 1.2828413316692309,
+          "lon": 103.86292600719443,
+          "caption": "",
+          "image": ["malay_garden.png"]
         },
         {
           "title": "Gardens by the Bay",
@@ -146,15 +186,7 @@
           "lat": 1.2816,
           "lon": 103.8636,
           "caption": "",
-          "images": ["garden_by_the_bay.png", "malay_garden.png"]
-        },
-        {
-          "title": "Changi Airport",
-          "type": "travel",
-          "lat": 1.3644,
-          "lon": 103.9915,
-          "caption": "",
-          "image": null
+          "images": ["garden_by_the_bay.png"]
         }
       ]
     }
