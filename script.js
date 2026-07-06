@@ -134,7 +134,7 @@ fetch('data.json?v=' + Date.now())
           </div>
 
           <div class="day-recap">
-            <h3>WHAT I </h3>
+            <h3>WHAT I SAW</h3>
             <p>${day.learned}</p>
             <h3>WHAT I TAKE AWAY</h3>
             <p>${day.futurePractice}</p>
