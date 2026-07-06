@@ -6,7 +6,7 @@ const map = new maplibregl.Map({
 });
 
 const content = document.getElementById('content');
-
+let closingEnding = false;
 fetch('data.json?v=' + Date.now())
   .then(res => res.json())
   .then(({ days }) => {
@@ -361,36 +361,37 @@ setTimeout(() => {
 
   if (!trigger) return;
 
+  if (closingEnding) return;
+
   const threshold =
     content.scrollHeight -
     content.clientHeight -
-    150;
+    100;
 
   if (content.scrollTop >= threshold) {
-    document.body.classList.add(
-      'ending-active'
-    );
+    document.body.classList.add('ending-active');
   } else {
-    document.body.classList.remove(
-      'ending-active'
-    );
+    document.body.classList.remove('ending-active');
   }
 });
 
 document.getElementById('ending-screen')
   .addEventListener('click', () => {
 
+    closingEnding = true;
+
     document.body.classList.remove(
       'ending-active'
     );
 
-    content.scrollTo({
-      top:
-        content.scrollHeight -
-        content.clientHeight -
-        800,
-      behavior: 'instant'
-    });
+    content.scrollTop =
+      content.scrollHeight -
+      content.clientHeight -
+      400;
+
+    setTimeout(() => {
+      closingEnding = false;
+    }, 300);
 
   });
     
