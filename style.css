@@ -362,6 +362,7 @@ body{
 body.ending-active #ending-screen{
   opacity:1;
   visibility:visible;
+  pointer-events:auto;
 }
 
 body.ending-active #content{
