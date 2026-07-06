@@ -35,17 +35,17 @@ fetch('data.json?v=' + Date.now())
         });
 
         map.addLayer({
-          id: `route-${day.id}`,
-          type: 'line',
-          source: `route-${day.id}`,
-          paint: {
-            'line-color': day.color,
-            'line-width': 2,
-            'line-opacity': 0.55,
-            'line-dasharray': [1, 1.6]
-          }
-        });
-
+  id: `route-${day.id}`,
+  type: 'line',
+  source: `route-${day.id}`,
+  paint: {
+    'line-color': day.color,
+    'line-width': 2,
+    'line-opacity': 0.55,
+    'line-dasharray': [1, 1.6]
+  }
+});
+        
         day.stops.forEach((stop, index) => {
 
           features.push({
@@ -92,6 +92,10 @@ fetch('data.json?v=' + Date.now())
         }
       });
 
+      if (days.length) {
+  setActiveDay(days[0].id);
+}
+      
     });
 
     /* ==========================
@@ -205,6 +209,8 @@ function fitDay(dayId) {
 }
 
 function setActiveDay(dayId) {
+
+  if (!map.getSource('stops')) return;
 
   if (dayId === activeDay)
     return;
@@ -327,14 +333,6 @@ const observer =
 dayBlocks.forEach(block => {
   observer.observe(block);
 });
-
-setTimeout(() => {
-  if (days.length) {
-    setActiveDay(
-      days[0].id
-    );
-  }
-}, 500);
 
     /* ==========================
        DAY BUTTON JUMP
