@@ -381,7 +381,7 @@ document.getElementById('ending-screen')
     content.scrollTop =
       content.scrollHeight -
       content.clientHeight -
-      600;
+      300;
 
     // đợi 1 frame rồi mới remove class
     requestAnimationFrame(() => {
