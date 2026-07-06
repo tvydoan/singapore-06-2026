@@ -379,9 +379,7 @@ document.getElementById('ending-screen')
 
     // đẩy panel lên trước khi tắt overlay
     content.scrollTop =
-      content.scrollHeight -
-      content.clientHeight -
-      300;
+  document.getElementById('ending-trigger').offsetTop - 200;
 
     // đợi 1 frame rồi mới remove class
     requestAnimationFrame(() => {
