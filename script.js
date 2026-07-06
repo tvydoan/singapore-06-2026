@@ -379,7 +379,7 @@ document.getElementById('ending-screen')
 
     // đẩy panel lên trước khi tắt overlay
     content.scrollTop =
-  document.getElementById('ending-trigger').offsetTop - 200;
+  document.getElementById('ending-trigger').offsetTop - 100;
 
     // đợi 1 frame rồi mới remove class
     requestAnimationFrame(() => {
@@ -390,7 +390,7 @@ document.getElementById('ending-screen')
 
     setTimeout(() => {
       closingEnding = false;
-    }, 400);
+    }, 200);
 
   });
 
